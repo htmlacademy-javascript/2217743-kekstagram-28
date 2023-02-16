@@ -1,7 +1,7 @@
 # Личный проект «Кекстаграм»
 
 * Студент: [Артем Климичев](https://up.htmlacademy.ru/javascript/28/user/2217743).
-* Наставник: `Неизвестно`.
+* Наставник: [Дмитрий (sench) Железняков](https://htmlacademy.ru/profile/sench).
 
 ---
 
