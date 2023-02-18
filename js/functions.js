@@ -39,8 +39,5 @@ function completeString(str, strLength, addSymbol) {
       return el;
     })
   }
-  return str;
+  return str.join('');
 }
-
-
-console.log(completeString('1', 4, '0'))
