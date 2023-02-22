@@ -23,8 +23,8 @@ const getAnyNumber = () => {
   const array = [];
 
   return function () {
-    const IS_NEW_NUM = true;
-    while (IS_NEW_NUM) {
+    const IS_NEW_NUMBER = true;
+    while (IS_NEW_NUMBER) {
       const randomNumber = Math.floor(Math.random() * 999);
       if (array.indexOf(randomNumber) === -1) {
         array.push(randomNumber);
