@@ -1,8 +1,9 @@
 const NAMES = ['Артем', 'Сергей', 'Саша', 'Павел', 'Оля', 'Катя', 'Степа', 'Аня'];
 const COMMENTS = ['Всё отлично!', 'В целом всё неплохо. Но не всё.'];
 
-const getRandomNum = (min, max) => Math.trunc(Math.random() * (max - min + 1) + min);
-function getRandomNumOfArray(max) {
+const getRandomNumber = (min, max) => Math.trunc(Math.random() * (max - min + 1) + min);
+
+const getRandomNumberOfArray = (max) => {
   const array = [];
   while (array.length < max) {
     const randomNumber = Math.floor(Math.random() * max);
@@ -16,13 +17,14 @@ function getRandomNumOfArray(max) {
     array.shift();
     return id;
   };
-}
-function getAnyNum() {
+};
+
+const getAnyNumber = () => {
   const array = [];
 
   return function () {
-    // eslint-disable-next-line no-constant-condition
-    while (true) {
+    const IS_NEW_NUM = true;
+    while (IS_NEW_NUM) {
       const randomNumber = Math.floor(Math.random() * 999);
       if (array.indexOf(randomNumber) === -1) {
         array.push(randomNumber);
@@ -30,20 +32,20 @@ function getAnyNum() {
       }
     }
   };
-}
+};
 
-const getNum = getAnyNum();
-const getId = getRandomNumOfArray(25);
-const getUrlId = getRandomNumOfArray(25);
+const getNumber = getAnyNumber();
+const getId = getRandomNumberOfArray(25);
+const getUrlId = getRandomNumberOfArray(25);
 
 const createObjects = () => ({
   id: getId(),
   url: `photos/${getUrlId()}.jpg`,
   description: 'Фото кота',
-  likes: getRandomNum(15, 200),
+  likes: getRandomNumber(15, 200),
   comments: [{
-    id: getNum(),
-    avatar: `img/avatar-${getRandomNum(1, 6)}.svg`,
+    id: getNumber(),
+    avatar: `img/avatar-${getRandomNumber(1, 6)}.svg`,
     message: COMMENTS[Math.floor(Math.random() * COMMENTS.length)],
     name: NAMES[Math.floor(Math.random() * NAMES.length)],
   }],
