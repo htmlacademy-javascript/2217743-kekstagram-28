@@ -1,6 +1,6 @@
 import {similarObjects} from './data.js';
 
-const imgUpload = document.querySelector('.img-upload');
+const picturesContainer = document.querySelector('.img-upload');
 const picture = document.querySelector('#picture').content.querySelector('.picture');
 
 const similarPictures = document.createDocumentFragment();
@@ -13,4 +13,4 @@ similarObjects.forEach((el) => {
   similarPictures.appendChild(pictureClone);
 });
 
-imgUpload.appendChild(similarPictures);
+picturesContainer.appendChild(similarPictures);
