@@ -3,7 +3,7 @@ const getRandomNumber = (min, max) => Math.trunc(Math.random() * (max - min + 1)
 const getRandomNumberOfArray = (max) => {
   const array = [];
   while (array.length < max) {
-    const randomNumber = Math.floor(Math.random() * max);
+    const randomNumber = Math.floor(Math.random() * max + 1);
     if (array.indexOf(randomNumber) === -1) {
       array.push(randomNumber);
     }
