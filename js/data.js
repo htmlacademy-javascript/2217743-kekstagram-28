@@ -17,6 +17,71 @@ const createObjects = () => ({
     avatar: `img/avatar-${getRandomNumber(1, 6)}.svg`,
     message: COMMENTS[Math.floor(Math.random() * COMMENTS.length)],
     name: NAMES[Math.floor(Math.random() * NAMES.length)],
+  },{
+    id: getNumber(),
+    avatar: `img/avatar-${getRandomNumber(1, 6)}.svg`,
+    message: COMMENTS[Math.floor(Math.random() * COMMENTS.length)],
+    name: NAMES[Math.floor(Math.random() * NAMES.length)],
+  },{
+    id: getNumber(),
+    avatar: `img/avatar-${getRandomNumber(1, 6)}.svg`,
+    message: COMMENTS[Math.floor(Math.random() * COMMENTS.length)],
+    name: NAMES[Math.floor(Math.random() * NAMES.length)],
+  },{
+    id: getNumber(),
+    avatar: `img/avatar-${getRandomNumber(1, 6)}.svg`,
+    message: COMMENTS[Math.floor(Math.random() * COMMENTS.length)],
+    name: NAMES[Math.floor(Math.random() * NAMES.length)],
+  },{
+    id: getNumber(),
+    avatar: `img/avatar-${getRandomNumber(1, 6)}.svg`,
+    message: COMMENTS[Math.floor(Math.random() * COMMENTS.length)],
+    name: NAMES[Math.floor(Math.random() * NAMES.length)],
+  },{
+    id: getNumber(),
+    avatar: `img/avatar-${getRandomNumber(1, 6)}.svg`,
+    message: COMMENTS[Math.floor(Math.random() * COMMENTS.length)],
+    name: NAMES[Math.floor(Math.random() * NAMES.length)],
+  },{
+    id: getNumber(),
+    avatar: `img/avatar-${getRandomNumber(1, 6)}.svg`,
+    message: COMMENTS[Math.floor(Math.random() * COMMENTS.length)],
+    name: NAMES[Math.floor(Math.random() * NAMES.length)],
+  },{
+    id: getNumber(),
+    avatar: `img/avatar-${getRandomNumber(1, 6)}.svg`,
+    message: COMMENTS[Math.floor(Math.random() * COMMENTS.length)],
+    name: NAMES[Math.floor(Math.random() * NAMES.length)],
+  },{
+    id: getNumber(),
+    avatar: `img/avatar-${getRandomNumber(1, 6)}.svg`,
+    message: COMMENTS[Math.floor(Math.random() * COMMENTS.length)],
+    name: NAMES[Math.floor(Math.random() * NAMES.length)],
+  },{
+    id: getNumber(),
+    avatar: `img/avatar-${getRandomNumber(1, 6)}.svg`,
+    message: COMMENTS[Math.floor(Math.random() * COMMENTS.length)],
+    name: NAMES[Math.floor(Math.random() * NAMES.length)],
+  },{
+    id: getNumber(),
+    avatar: `img/avatar-${getRandomNumber(1, 6)}.svg`,
+    message: COMMENTS[Math.floor(Math.random() * COMMENTS.length)],
+    name: NAMES[Math.floor(Math.random() * NAMES.length)],
+  },{
+    id: getNumber(),
+    avatar: `img/avatar-${getRandomNumber(1, 6)}.svg`,
+    message: COMMENTS[Math.floor(Math.random() * COMMENTS.length)],
+    name: NAMES[Math.floor(Math.random() * NAMES.length)],
+  },{
+    id: getNumber(),
+    avatar: `img/avatar-${getRandomNumber(1, 6)}.svg`,
+    message: COMMENTS[Math.floor(Math.random() * COMMENTS.length)],
+    name: NAMES[Math.floor(Math.random() * NAMES.length)],
+  },{
+    id: getNumber(),
+    avatar: `img/avatar-${getRandomNumber(1, 6)}.svg`,
+    message: COMMENTS[Math.floor(Math.random() * COMMENTS.length)],
+    name: NAMES[Math.floor(Math.random() * NAMES.length)],
   }],
 });
 

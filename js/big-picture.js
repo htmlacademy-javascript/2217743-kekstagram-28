@@ -9,6 +9,8 @@ const picturesNode = document.querySelectorAll('.picture');
 const descriptionNode = document.querySelector('.social__caption');
 const socialCommentsNode = document.querySelector('.social__comments');
 const bodyNode = document.querySelector('body');
+const commentsLoaderBtn = document.querySelector('.comments-loader');
+const socialCommentsCountNode = document.querySelector('.social__comment-count');
 const IMG_SIZE = 35;
 
 picturesNode.forEach((el, index) => {
@@ -16,8 +18,6 @@ picturesNode.forEach((el, index) => {
     .addEventListener('click', (e) => {
       e.preventDefault();
       bodyNode.classList.add('modal-open');
-      document.querySelector('.social__comment-count').classList.add('hidden');
-      document.querySelector('.comments-loader').classList.add('hidden');
       socialCommentsNode.innerHTML = '';
       createBigPicture(index);
     });
@@ -29,8 +29,37 @@ function createBigPicture(index) {
   likesCountNode.textContent = String(similarObjects[index].likes);
   commentsCountNode.textContent = String(similarObjects[index].comments.length);
   descriptionNode.textContent = similarObjects[index].description;
-  createComments(index).forEach((el) => socialCommentsNode.appendChild(el));
+  commentsCounter(index);
 }
+
+function commentsCounter(i) {
+  if (similarObjects[i].comments.length <= 5) {
+    commentsLoaderBtn.classList.add('hidden');
+  }
+  createComments(i).forEach((el, index) => {
+    if (index < 5) {
+      socialCommentsNode.appendChild(el);
+    } else {
+      el.classList.add('hidden');
+      socialCommentsNode.appendChild(el);
+    }
+  });
+}
+
+commentsLoaderBtn.addEventListener('click', () => {
+  let count = 0;
+  const commentsCountArray = socialCommentsNode.querySelectorAll('.hidden');
+  if (count < commentsCountArray.length) {
+    count += 5;
+  }
+  commentsCountArray.forEach((el, index) => {
+    if (index < count) {
+      el.classList.remove('hidden');
+    }
+  });
+  socialCommentsCountNode.textContent = `${document.querySelectorAll('.social__comment:not(.hidden)').length} из
+  ${document.querySelectorAll('.social__comment').length} комментариев`;
+});
 
 function createComments(index) {
   const commentArray = [];
