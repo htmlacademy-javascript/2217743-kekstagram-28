@@ -1,5 +1,5 @@
 import {similarObjects} from './data.js';
-
+const IMG_SIZE = 35;
 const bigPictureNode = document.querySelector('.big-picture');
 const likesCountNode = document.querySelector('.likes-count');
 const bigPictureImgNode = document.querySelector('.big-picture__img img');
@@ -8,9 +8,8 @@ const picturesNode = document.querySelectorAll('.picture');
 const descriptionNode = document.querySelector('.social__caption');
 const socialCommentsNode = document.querySelector('.social__comments');
 const bodyNode = document.querySelector('body');
-const commentsLoaderBtn = document.querySelector('.comments-loader');
+const commentsLoaderBtnNode = document.querySelector('.comments-loader');
 const socialCommentsCountNode = document.querySelector('.social__comment-count');
-const IMG_SIZE = 35;
 
 picturesNode.forEach((el, index) => {
   el
@@ -33,13 +32,14 @@ function createBigPicture(index) {
 }
 
 function commentsCounter(i) {
-  if (similarObjects[i].comments.length <= 5) {
-    commentsLoaderBtn.classList.add('hidden');
+  const MAX_COMMENTS_LENGTH = 5;
+  if (similarObjects[i].comments.length <= MAX_COMMENTS_LENGTH) {
+    commentsLoaderBtnNode.classList.add('hidden');
   } else {
-    commentsLoaderBtn.classList.remove('hidden');
+    commentsLoaderBtnNode.classList.remove('hidden');
   }
   createComments(i).forEach((el, index) => {
-    if (index < 5) {
+    if (index < MAX_COMMENTS_LENGTH) {
       socialCommentsNode.appendChild(el);
     } else {
       el.classList.add('hidden');
@@ -48,11 +48,13 @@ function commentsCounter(i) {
   });
 }
 
-commentsLoaderBtn.addEventListener('click', () => {
+commentsLoaderBtnNode.addEventListener('click', () => {
   let count = 0;
+  const MAX_COMMENTS_ARRAY_LENGTH = 6;
+  const COMMENTS_VISIBLE_NUMBER = 5;
   const commentsCountArray = socialCommentsNode.querySelectorAll('.hidden');
   if (count < commentsCountArray.length) {
-    count += 5;
+    count += COMMENTS_VISIBLE_NUMBER;
   }
   commentsCountArray.forEach((el, index) => {
     if (index < count) {
@@ -61,13 +63,13 @@ commentsLoaderBtn.addEventListener('click', () => {
   });
   socialCommentsCountNode.textContent = `${checkCommentsLength(true)} из
   ${checkCommentsLength(false)} комментариев`;
-  if (commentsCountArray.length < 6) {
-    commentsLoaderBtn.classList.add('hidden');
+  if (commentsCountArray.length < MAX_COMMENTS_ARRAY_LENGTH) {
+    commentsLoaderBtnNode.classList.add('hidden');
   }
 });
 
 function checkCommentsLength(excludeHidden) {
-  let commentsArray = [];
+  let commentsArray;
   if (excludeHidden){
     commentsArray = socialCommentsNode.querySelectorAll('.social__comment:not(.hidden)');
   } else {
