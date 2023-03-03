@@ -1,34 +1,35 @@
 import {similarObjects} from './data.js';
 
-const bigPicture = document.querySelector('.big-picture');
-const likesCount = document.querySelector('.likes-count');
-const bigPictureImg = document.querySelector('.big-picture__img img');
-const commentsCount = document.querySelector('.comments-count');
-const cancelBtn = document.querySelector('.big-picture__cancel');
-const pictures = document.querySelectorAll('.picture');
-const description = document.querySelector('.social__caption');
-const socialComments = document.querySelector('.social__comments');
-const body = document.querySelector('body');
+const bigPictureNode = document.querySelector('.big-picture');
+const likesCountNode = document.querySelector('.likes-count');
+const bigPictureImgNode = document.querySelector('.big-picture__img img');
+const commentsCountNode = document.querySelector('.comments-count');
+const cancelBtnNode = document.querySelector('.big-picture__cancel');
+const picturesNode = document.querySelectorAll('.picture');
+const descriptionNode = document.querySelector('.social__caption');
+const socialCommentsNode = document.querySelector('.social__comments');
+const bodyNode = document.querySelector('body');
+const IMG_SIZE = 35;
 
-pictures.forEach((el, index) => {
+picturesNode.forEach((el, index) => {
   el
     .addEventListener('click', (e) => {
       e.preventDefault();
-      body.classList.add('modal-open');
+      bodyNode.classList.add('modal-open');
       document.querySelector('.social__comment-count').classList.add('hidden');
       document.querySelector('.comments-loader').classList.add('hidden');
-      socialComments.innerHTML = '';
+      socialCommentsNode.innerHTML = '';
       createBigPicture(index);
     });
 });
 
 function createBigPicture(index) {
-  bigPicture.classList.remove('hidden');
-  bigPictureImg.src = similarObjects[index].url;
-  likesCount.textContent = String(similarObjects[index].likes);
-  commentsCount.textContent = String(similarObjects[index].comments.length);
-  description.textContent = similarObjects[index].description;
-  createComments(index).forEach((el) => socialComments.appendChild(el));
+  bigPictureNode.classList.remove('hidden');
+  bigPictureImgNode.src = similarObjects[index].url;
+  likesCountNode.textContent = String(similarObjects[index].likes);
+  commentsCountNode.textContent = String(similarObjects[index].comments.length);
+  descriptionNode.textContent = similarObjects[index].description;
+  createComments(index).forEach((el) => socialCommentsNode.appendChild(el));
 }
 
 function createComments(index) {
@@ -44,8 +45,8 @@ function createComments(index) {
     image.classList.add('social__picture');
     image.src = similarObjects[index].comments[i].avatar;
     image.alt = similarObjects[index].comments[i].name;
-    image.width = 35;
-    image.height = 35;
+    image.width = IMG_SIZE;
+    image.height = IMG_SIZE;
 
     commentText.classList.add('social__text');
     commentText.textContent = similarObjects[index].comments[i].message;
@@ -57,15 +58,15 @@ function createComments(index) {
   return commentArray;
 }
 
-cancelBtn.addEventListener('click',
+cancelBtnNode.addEventListener('click',
   () => {
-    bigPicture.classList.add('hidden');
-    body.classList.remove('modal-open');
+    bigPictureNode.classList.add('hidden');
+    bodyNode.classList.remove('modal-open');
   });
 
-body.addEventListener('keydown', (e) => {
+bodyNode.addEventListener('keydown', (e) => {
   if (e.key === 'Escape') {
-    body.classList.remove('modal-open');
-    bigPicture.classList.add('hidden');
+    bodyNode.classList.remove('modal-open');
+    bigPictureNode.classList.add('hidden');
   }
 });
