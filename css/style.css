@@ -711,6 +711,7 @@ main {
 }
 
 
+
 /**
  * Кнопка для отправки изображения
  */
@@ -1213,6 +1214,21 @@ main {
   background-color: rgba(0, 0, 0, 0.8);
 }
 
+.text__description--error {
+  border: 2px solid red;
+}
+
+.error__text {
+  position: absolute;
+  left: 0;
+  right: 0;
+  color: red;
+  bottom: 0;
+  background-color: black;
+  width: 400px;
+  margin: 0 auto;
+}
+
 .error__inner,
 .success__inner {
   position: relative;
@@ -1302,6 +1318,10 @@ main {
 /**
  * Экран загрузки изображения
  */
+
+.img-upload__field-wrapper {
+  position: relative;
+}
 
 .img-upload__message--loading::before {
   content: "";
