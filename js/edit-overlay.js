@@ -76,7 +76,7 @@ commentNode.addEventListener('blur', () => {
   bodyNode.addEventListener('keydown', escapeClick);
 });
 
-uploadFormNode.addEventListener('submit', (e) => {
+uploadFormNode.addEventListener('submit', () => {
   pristine.validate();
 });
 
