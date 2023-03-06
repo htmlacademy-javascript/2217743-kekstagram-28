@@ -16,9 +16,7 @@ const hashtag = /^#[a-zа-яё0-9]{1,19}$/i;
 
 const validateComment = (value) => value.length < 140;
 
-function hasDuplicates(array) {
-  return (new Set(array)).size === array.length;
-}
+const hasDuplicates = (array) => (new Set(array)).size === array.length;
 
 const validateHashtag = (value) => {
   let IS_VALID = true;
