@@ -12,9 +12,15 @@ const pristine = new Pristine(uploadFormNode, {
   errorTextClass: 'error__text'
 });
 
-const hashtag = /^#[a-zа-яё0-9]{1,19}$/i;
+const validateNumbers = {
+  MAX_VALUE_LENGTH: 140,
+  MAX_HASHTAG_LENGTH: 5,
+  MAX_ARRAY_LENGTH: 6,
+};
 
-const validateComment = (value) => value.length < 140;
+const HASHTAG = /^#[a-zа-яё0-9]{1,19}$/i;
+
+const validateComment = (value) => value.length < validateNumbers.MAX_VALUE_LENGTH;
 
 const hasDuplicates = (array) => (new Set(array)).size === array.length;
 
@@ -22,18 +28,18 @@ const validateHashtag = (value) => {
   let IS_VALID = true;
   const array = value.trim().split(' ');
   array.forEach((el) => {
-    if (!hashtag.test(el)) {
+    if (!HASHTAG.test(el)) {
       IS_VALID = false;
       return IS_VALID;
     }
   });
   const IS_DUPLICATE = hasDuplicates(array);
-  return IS_DUPLICATE === IS_VALID && array.length < 6;
+  return IS_DUPLICATE === IS_VALID && array.length < validateNumbers.MAX_ARRAY_LENGTH || array[0] === '';
 };
 
 const hashtagErrorText = (value) => {
-  const hashtagsArray = value.split(' ');
-  if (hashtagsArray.length > 5) {
+  const hashtagsArray = value.trim().split(' ');
+  if (hashtagsArray.length > validateNumbers.MAX_HASHTAG_LENGTH) {
     return 'Количество хэштэгов не должно быть больше 5';
   }
   if (!hasDuplicates(hashtagsArray)) {
@@ -71,7 +77,6 @@ commentNode.addEventListener('blur', () => {
 });
 
 uploadFormNode.addEventListener('submit', (e) => {
-  e.preventDefault();
   pristine.validate();
 });
 
