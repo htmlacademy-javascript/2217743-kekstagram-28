@@ -1,3 +1,4 @@
 import './create-pictures.js';
 import './big-picture.js';
-import './edit-overlay.js';
+import './validate-fields.js';
+import './ovelray-edit-picture.js';
