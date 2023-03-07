@@ -101,7 +101,8 @@ uploadFileNode.addEventListener('change', () => {
   uploadFileNode.value = null;
 });
 
-closeEditBtnNode.addEventListener('click', () => {
+closeEditBtnNode.addEventListener('click', (e) => {
+  e.preventDefault();
   imgEditOverlayNode.classList.add('hidden');
   bodyNode.classList.remove('modal-open');
   defaultOverlayProperties();
