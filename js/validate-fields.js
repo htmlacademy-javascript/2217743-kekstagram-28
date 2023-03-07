@@ -5,6 +5,11 @@ const bodyNode = document.querySelector('body');
 const uploadFormNode = document.querySelector('.img-upload__form');
 const hashtagNode = uploadFormNode.querySelector('.text__hashtags');
 const commentNode = uploadFormNode.querySelector('.text__description');
+const imgPreviewNode = document.querySelector('.img-upload__preview');
+const scaleFieldNode = document.querySelector('.scale__control--value');
+const imgNode = imgPreviewNode.querySelector('img');
+const effectLevelNode = document.querySelector('.effect-level');
+
 
 const pristine = new Pristine(uploadFormNode, {
   classTo: 'img-upload__field-wrapper',
@@ -54,11 +59,18 @@ pristine.addValidator(uploadFormNode
 pristine.addValidator(uploadFormNode
   .querySelector('.text__hashtags'), validateHashtag, hashtagErrorText);
 
+const defaultOverlayProperties = () => {
+  imgNode.className = '';
+  imgNode.classList.add('none');
+  imgNode.style.filter = '';
+};
+
 const escapeClick = (e) => {
   if (e.key === 'Escape') {
     imgEditOverlayNode.classList.add('hidden');
     bodyNode.classList.remove('modal-open');
   }
+  defaultOverlayProperties();
 };
 
 
@@ -83,12 +95,19 @@ uploadFormNode.addEventListener('submit', () => {
 uploadFileNode.addEventListener('change', () => {
   imgEditOverlayNode.classList.remove('hidden');
   bodyNode.classList.add('modal-open');
+  effectLevelNode.classList.add('hidden');
+  scaleFieldNode.value = '100%';
+  imgPreviewNode.style.transform = 'scale(1)';
   uploadFileNode.value = null;
 });
 
-closeEditBtnNode.addEventListener('click', () => {
+closeEditBtnNode.addEventListener('click', (e) => {
+  e.preventDefault();
   imgEditOverlayNode.classList.add('hidden');
   bodyNode.classList.remove('modal-open');
+  defaultOverlayProperties();
 });
 
 bodyNode.addEventListener('keydown', escapeClick);
+
+export {scaleFieldNode, imgPreviewNode, imgNode};
