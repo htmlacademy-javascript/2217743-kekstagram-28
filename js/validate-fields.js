@@ -72,7 +72,7 @@ const escapeClick = (e) => {
     imgEditOverlayNode.classList.add('hidden');
     bodyNode.classList.remove('modal-open');
     if (bodyNode.querySelector('.error, .success')) {
-      bodyNode.removeChild(bodyNode.querySelector('.success, .error'))
+      bodyNode.removeChild(bodyNode.querySelector('.success, .error'));
     }
   }
   defaultOverlayProperties();
@@ -98,12 +98,14 @@ const sendFile = (fileName) => {
     e.preventDefault();
     const formData = new FormData(e.target);
     formData.set('filename', fileName);
-    await API.send(formData).then(() => uploadFileNode.value = null);
+    await API.send(formData).then(() => {
+      uploadFileNode.value = null;
+    });
     pristine.validate();
-  }
-}
+  };
+};
 
-uploadFileNode.addEventListener('change', (e) => {
+uploadFileNode.addEventListener('change', () => {
   pristine.reset();
   sendFile(uploadFileNode.files[0]);
   imgEditOverlayNode.classList.remove('hidden');
