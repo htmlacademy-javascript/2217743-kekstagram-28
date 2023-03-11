@@ -1,4 +1,4 @@
-import {similarObjects} from './data.js';
+import {similarObjects} from './api.js';
 
 const picturesContainerNode = document.querySelector('.pictures');
 const pictureNode = document.querySelector('#picture').content.querySelector('.picture');
