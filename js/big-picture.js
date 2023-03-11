@@ -1,4 +1,4 @@
-import {similarObjects} from './data.js';
+import {similarObjects} from './api.js';
 const IMG_SIZE = 35;
 const bigPictureNode = document.querySelector('.big-picture');
 const likesCountNode = document.querySelector('.likes-count');

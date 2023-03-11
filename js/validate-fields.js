@@ -1,3 +1,4 @@
+import {API} from './api.js';
 const uploadFileNode = document.querySelector('#upload-file');
 const imgEditOverlayNode = document.querySelector('.img-upload__overlay');
 const closeEditBtnNode = document.querySelector('.img-upload__cancel');
@@ -63,12 +64,16 @@ const defaultOverlayProperties = () => {
   imgNode.className = '';
   imgNode.classList.add('none');
   imgNode.style.filter = '';
+  uploadFormNode.reset();
 };
 
 const escapeClick = (e) => {
   if (e.key === 'Escape') {
     imgEditOverlayNode.classList.add('hidden');
     bodyNode.classList.remove('modal-open');
+    if (bodyNode.querySelector('.error, .success')) {
+      bodyNode.removeChild(bodyNode.querySelector('.success, .error'))
+    }
   }
   defaultOverlayProperties();
 };
@@ -88,17 +93,24 @@ commentNode.addEventListener('blur', () => {
   bodyNode.addEventListener('keydown', escapeClick);
 });
 
-uploadFormNode.addEventListener('submit', () => {
-  pristine.validate();
-});
+const sendFile = (fileName) => {
+  uploadFormNode.onsubmit = async (e) => {
+    e.preventDefault();
+    const formData = new FormData(e.target);
+    formData.set('filename', fileName);
+    await API.send(formData).then(() => uploadFileNode.value = null);
+    pristine.validate();
+  }
+}
 
-uploadFileNode.addEventListener('change', () => {
+uploadFileNode.addEventListener('change', (e) => {
+  pristine.reset();
+  sendFile(uploadFileNode.files[0]);
   imgEditOverlayNode.classList.remove('hidden');
   bodyNode.classList.add('modal-open');
   effectLevelNode.classList.add('hidden');
   scaleFieldNode.value = '100%';
   imgPreviewNode.style.transform = 'scale(1)';
-  uploadFileNode.value = null;
 });
 
 closeEditBtnNode.addEventListener('click', (e) => {
