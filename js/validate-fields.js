@@ -1,6 +1,6 @@
 import {API} from './api.js';
 const uploadFileNode = document.querySelector('#upload-file');
-const imgEditOverlayNode = document.querySelector('.img-upload__overlay');
+export const imgEditOverlayNode = document.querySelector('.img-upload__overlay');
 const closeEditBtnNode = document.querySelector('.img-upload__cancel');
 const bodyNode = document.querySelector('body');
 const uploadFormNode = document.querySelector('.img-upload__form');
@@ -60,7 +60,7 @@ pristine.addValidator(uploadFormNode
 pristine.addValidator(uploadFormNode
   .querySelector('.text__hashtags'), validateHashtag, hashtagErrorText);
 
-const defaultOverlayProperties = () => {
+export const defaultOverlayProperties = () => {
   imgNode.className = '';
   imgNode.classList.add('none');
   imgNode.style.filter = '';
@@ -74,8 +74,8 @@ const escapeClick = (e) => {
     if (bodyNode.querySelector('.error, .success')) {
       bodyNode.removeChild(bodyNode.querySelector('.success, .error'));
     }
+    defaultOverlayProperties();
   }
-  defaultOverlayProperties();
 };
 
 
