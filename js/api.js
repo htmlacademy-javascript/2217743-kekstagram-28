@@ -4,6 +4,7 @@ const successMessageNode = document.querySelector('#success').content
 const errorMessageNode = document.querySelector('#error').content
   .querySelector('.error');
 const bodyNode = document.querySelector('body');
+const imgFiltersNode = document.querySelector('.img-filters');
 
 const urlData = 'https://28.javascript.pages.academy/kekstagram/data';
 const urlPost = 'https://28.javascript.pages.academy/kekstagram';
@@ -34,11 +35,16 @@ export const API = {
     await response.json();
   },
   async get() {
-    return await fetch(urlData).then((response) => response.json());
+    const res = await fetch(urlData);
+    if (res.ok) {
+      imgFiltersNode.classList.remove('img-filters--inactive');
+      return res.json();
+    } else {
+      throw new Error(`error address ${urlData}`);
+    }
   },
 };
 
-export const similarObjects = await API.get()
-  // eslint-disable-next-line no-console
-  .catch((err) => console.log(err));
+// eslint-disable-next-line no-console
+export const similarObjects = await API.get().catch((err) => console.log(err));
 
