@@ -1,13 +1,16 @@
-const filterButtons = document.querySelectorAll('.img-filters__button');
 import {API, similarObjects} from './api.js';
 import {createPictures} from './create-pictures.js';
+const ELEMENTS_COUNT = 10;
+const TIMEOUT_DELAY = 500;
+const filterButtons = document.querySelectorAll('.img-filters__button');
+
+
 const discussedFilter = (array) => array
   .slice()
   .sort((prev, next) => prev.comments.length - next.comments.length)
   .reverse();
 
 const randomFilter = (array) => {
-  const ELEMENTS_COUNT = 10;
   const result = [];
 
   for (let i = 0; i < ELEMENTS_COUNT; i++) {
@@ -18,7 +21,7 @@ const randomFilter = (array) => {
   return result;
 };
 
-export const debounce = (callback, timeoutDelay = 500) => {
+export const debounce = (callback, timeoutDelay) => {
   let timeoutId;
 
   return (...rest) => {
@@ -50,5 +53,5 @@ filterButtons.forEach((button) => {
       }
     });
     swapClasses(e, filterButtons);
-  });
+  }, TIMEOUT_DELAY);
 });
