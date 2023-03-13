@@ -2,7 +2,7 @@ import {API, similarObjects} from './api.js';
 import {createPictures} from './create-pictures.js';
 const ELEMENTS_COUNT = 10;
 const TIMEOUT_DELAY = 500;
-const filterButtons = document.querySelectorAll('.img-filters__button');
+const filterButtonsNode = document.querySelectorAll('.img-filters__button');
 
 
 const discussedFilter = (array) => array
@@ -45,13 +45,13 @@ const FILTERS_ID = {
   'filter-discussed':() => createPictures(discussedFilter(similarObjects)),
 };
 
-filterButtons.forEach((button) => {
+filterButtonsNode.forEach((button) => {
   button.onclick = debounce((e) => {
     Object.keys(FILTERS_ID).forEach((id) => {
       if (id === e.target.id) {
         debounce(FILTERS_ID[e.target.id].call());
       }
     });
-    swapClasses(e, filterButtons);
+    swapClasses(e, filterButtonsNode);
   }, TIMEOUT_DELAY);
 });
