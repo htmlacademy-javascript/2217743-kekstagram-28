@@ -9,6 +9,13 @@ const imgFiltersNode = document.querySelector('.img-filters');
 const urlData = 'https://28.javascript.pages.academy/kekstagram/data';
 const urlPost = 'https://28.javascript.pages.academy/kekstagram';
 
+export const errorValidate = () => {
+  bodyNode.appendChild(errorMessageNode);
+  errorMessageNode.querySelector('button').onclick = () => {
+    bodyNode.removeChild(bodyNode.querySelector('.error'));
+  };
+};
+
 export const API = {
   async send(data) {
     const response = await fetch(urlPost, {
@@ -18,10 +25,7 @@ export const API = {
     });
 
     if (!response.ok) {
-      bodyNode.appendChild(errorMessageNode);
-      errorMessageNode.querySelector('button').onclick = () => {
-        bodyNode.removeChild(bodyNode.querySelector('.error'));
-      };
+      errorValidate();
       throw new Error(`Error address ${urlPost}`);
     } else {
       bodyNode.appendChild(successMessageNode);

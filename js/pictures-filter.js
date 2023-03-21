@@ -46,12 +46,12 @@ const FILTERS_ID = {
 };
 
 filterButtonsNode.forEach((button) => {
-  button.onclick = debounce((e) => {
+  button.onclick = debounce((evt) => {
     Object.keys(FILTERS_ID).forEach((id) => {
-      if (id === e.target.id) {
-        debounce(FILTERS_ID[e.target.id].call());
+      if (id === evt.target.id) {
+        debounce(FILTERS_ID[evt.target.id].call());
       }
     });
-    swapClasses(e, filterButtonsNode);
+    swapClasses(evt, filterButtonsNode);
   }, TIMEOUT_DELAY);
 });

@@ -1,4 +1,4 @@
-import {API} from './api.js';
+import {API, errorValidate} from './api.js';
 const uploadFileNode = document.querySelector('#upload-file');
 export const imgEditOverlayNode = document.querySelector('.img-upload__overlay');
 const closeEditBtnNode = document.querySelector('.img-upload__cancel');
@@ -67,8 +67,8 @@ export const defaultOverlayProperties = () => {
   uploadFormNode.reset();
 };
 
-const escapeClick = (e) => {
-  if (e.key === 'Escape') {
+const escapeClick = (evt) => {
+  if (evt.key === 'Escape') {
     imgEditOverlayNode.classList.add('hidden');
     bodyNode.classList.remove('modal-open');
     if (bodyNode.querySelector('.error, .success')) {
@@ -94,14 +94,17 @@ commentNode.addEventListener('blur', () => {
 });
 
 const sendFile = (fileName) => {
-  uploadFormNode.onsubmit = async (e) => {
-    e.preventDefault();
-    const formData = new FormData(e.target);
-    formData.set('filename', fileName);
-    await API.send(formData).then(() => {
-      uploadFileNode.value = null;
-    });
-    pristine.validate();
+  uploadFormNode.onsubmit = async (evt) => {
+    evt.preventDefault();
+    if (pristine.validate()) {
+      const formData = new FormData(evt.target);
+      formData.set('filename', fileName);
+      await API.send(formData).then(() => {
+        uploadFileNode.value = null;
+      });
+    } else {
+      errorValidate();
+    }
   };
 };
 
@@ -115,8 +118,8 @@ uploadFileNode.addEventListener('change', () => {
   imgPreviewNode.style.transform = 'scale(1)';
 });
 
-closeEditBtnNode.addEventListener('click', (e) => {
-  e.preventDefault();
+closeEditBtnNode.addEventListener('click', (evt) => {
+  evt.preventDefault();
   imgEditOverlayNode.classList.add('hidden');
   bodyNode.classList.remove('modal-open');
   defaultOverlayProperties();

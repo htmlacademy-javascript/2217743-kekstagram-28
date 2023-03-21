@@ -108,10 +108,10 @@ buttonScale.smaller.addEventListener('click', scaleEdit);
 
 
 //Выбираем нужный эффект
-effectsNode.forEach((effect) => effect.addEventListener('click', (e) => {
+effectsNode.forEach((effect) => effect.addEventListener('click', (evt) => {
   imgPreviewNode.querySelector('img').className = '';
   Object.keys(effectsKeys).forEach((key) => {
-    if (e.target.id === key) {
+    if (evt.target.id === key) {
       imgNode.classList.add(effectsKeys[key].class);
       if (imgNode.className === 'none') {
         imgNode.style.filter = '';

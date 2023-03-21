@@ -16,8 +16,8 @@ export const createPictures = (array) => {
     pictureClone.querySelector('.picture__comments').textContent = el.comments.length;
     pictureClone.querySelector('.picture__likes').textContent = el.likes;
     pictureClone
-      .addEventListener('click', (e) => {
-        e.preventDefault();
+      .addEventListener('click', (evt) => {
+        evt.preventDefault();
         bodyNode.classList.add('modal-open');
         socialCommentsNode.innerHTML = '';
         createBigPicture(el);
