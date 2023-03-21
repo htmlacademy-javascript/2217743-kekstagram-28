@@ -98,8 +98,8 @@ cancelBtnNode.addEventListener('click',
     bodyNode.classList.remove('modal-open');
   });
 
-bodyNode.addEventListener('keydown', (e) => {
-  if (e.key === 'Escape') {
+bodyNode.addEventListener('keydown', (evt) => {
+  if (evt.key === 'Escape') {
     bodyNode.classList.remove('modal-open');
     bigPictureNode.classList.add('hidden');
   }
