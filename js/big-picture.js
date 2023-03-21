@@ -1,44 +1,32 @@
-import {similarObjects} from './api.js';
 const IMG_SIZE = 35;
 const bigPictureNode = document.querySelector('.big-picture');
 const likesCountNode = document.querySelector('.likes-count');
 const bigPictureImgNode = document.querySelector('.big-picture__img img');
 const cancelBtnNode = document.querySelector('.big-picture__cancel');
-const picturesNode = document.querySelectorAll('.picture');
 const descriptionNode = document.querySelector('.social__caption');
-const socialCommentsNode = document.querySelector('.social__comments');
-const bodyNode = document.querySelector('body');
+export const socialCommentsNode = document.querySelector('.social__comments');
+export const bodyNode = document.querySelector('body');
 const commentsLoaderBtnNode = document.querySelector('.comments-loader');
 const socialCommentsCountNode = document.querySelector('.social__comment-count');
 
-picturesNode.forEach((el, index) => {
-  el
-    .addEventListener('click', (e) => {
-      e.preventDefault();
-      bodyNode.classList.add('modal-open');
-      socialCommentsNode.innerHTML = '';
-      createBigPicture(index);
-    });
-});
-
-function createBigPicture(index) {
+export const createBigPicture = (obj) => {
   bigPictureNode.classList.remove('hidden');
-  bigPictureImgNode.src = similarObjects[index].url;
-  likesCountNode.textContent = String(similarObjects[index].likes);
-  descriptionNode.textContent = similarObjects[index].description;
-  commentsCounter(index);
+  bigPictureImgNode.src = obj.url;
+  likesCountNode.textContent = String(obj.likes);
+  descriptionNode.textContent = obj.description;
+  commentsCounter(obj);
   socialCommentsCountNode.textContent = `${document.querySelectorAll('.social__comment:not(.hidden)').length} из
-  ${similarObjects[index].comments.length} комментариев`;
-}
+  ${obj.comments.length} комментариев`;
+};
 
-function commentsCounter(i) {
+function commentsCounter(obj) {
   const MAX_COMMENTS_LENGTH = 5;
-  if (similarObjects[i].comments.length <= MAX_COMMENTS_LENGTH) {
+  if (obj.comments.length <= MAX_COMMENTS_LENGTH) {
     commentsLoaderBtnNode.classList.add('hidden');
   } else {
     commentsLoaderBtnNode.classList.remove('hidden');
   }
-  createComments(i).forEach((el, index) => {
+  createComments(obj).forEach((el, index) => {
     if (index < MAX_COMMENTS_LENGTH) {
       socialCommentsNode.appendChild(el);
     } else {
@@ -78,10 +66,10 @@ function checkCommentsLength(excludeHidden) {
   return commentsArray.length;
 }
 
-function createComments(index) {
+function createComments(obj) {
   const commentArray = [];
 
-  for (let i = 0; i < similarObjects[index].comments.length; i++) {
+  for (let i = 0; i < obj.comments.length; i++) {
     const commentBlock = document.createElement('li');
     const commentText = document.createElement('p');
     const image = document.createElement('img');
@@ -89,13 +77,13 @@ function createComments(index) {
     commentBlock.classList.add('social__comment');
 
     image.classList.add('social__picture');
-    image.src = similarObjects[index].comments[i].avatar;
-    image.alt = similarObjects[index].comments[i].name;
+    image.src = obj.comments[i].avatar;
+    image.alt = obj.comments[i].name;
     image.width = IMG_SIZE;
     image.height = IMG_SIZE;
 
     commentText.classList.add('social__text');
-    commentText.textContent = similarObjects[index].comments[i].message;
+    commentText.textContent = obj.comments[i].message;
     commentBlock.appendChild(image);
     commentBlock.appendChild(commentText);
     commentArray.push(commentBlock);
